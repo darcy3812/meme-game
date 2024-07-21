@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MemeGame.Domain\MemeGame.Domain.csproj" />
+    <ProjectReference Include="..\MemeGame.Application\MemeGame.Application.csproj" />
   </ItemGroup>
 
 </Project>

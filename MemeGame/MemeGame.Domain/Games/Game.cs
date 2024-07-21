@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MemeGame.Domain
+namespace MemeGame.Domain.Games
 {
     public class Game
     {

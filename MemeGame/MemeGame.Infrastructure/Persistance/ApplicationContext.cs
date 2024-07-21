@@ -1,4 +1,5 @@
 ﻿using MemeGame.Domain;
+using MemeGame.Domain.Games;
 using Microsoft.EntityFrameworkCore;
 
 namespace MemeGame.Infrastructure.Persistance

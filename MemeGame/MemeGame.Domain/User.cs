@@ -1,4 +1,6 @@
-﻿namespace MemeGame.Domain
+﻿using MemeGame.Domain.Games;
+
+namespace MemeGame.Domain
 {
     public class User
     {
