@@ -1,13 +1,9 @@
-﻿using MemeGame.Domain.Games;
-
-namespace MemeGame.Domain
+﻿namespace MemeGame.Domain
 {
     public class User
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int Points { get; set; }
-        public Game Game { get; set; }
-        public int GameId { get; set; }
+        public string ConnectionId { get; set; }
+        public string Name { get; set; }        
     }
 }

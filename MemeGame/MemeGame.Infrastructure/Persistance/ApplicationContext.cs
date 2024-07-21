@@ -11,6 +11,7 @@ namespace MemeGame.Infrastructure.Persistance
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<GameUser> GameUsers { get; set; }
         public DbSet<Meme> Memes { get; set; }
         public DbSet<Situation> Situations { get; set; }
         public DbSet<Game> Games { get; set; }

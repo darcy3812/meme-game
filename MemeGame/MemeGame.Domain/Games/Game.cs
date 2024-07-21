@@ -6,7 +6,7 @@ namespace MemeGame.Domain.Games
     public class Game
     {
         public int Id { get; set; }
-        public List<User> Users { get; set; }
+        public List<GameUser> GameUsers { get; set; }
         public string Name { get; set; }
         public string Hash { get; set; }
         public DateTime CreationDate { get; set; }

@@ -13,7 +13,7 @@ namespace MemeGame.Application.Games.Dto
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<Game, GameListItemDto>()
-                .Map(g => g.UsersCount, g => g.Users.Count);
+                .Map(g => g.UsersCount, g => g.GameUsers.Count);
         }
     }
 }
