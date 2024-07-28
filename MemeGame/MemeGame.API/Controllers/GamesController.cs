@@ -23,7 +23,7 @@ namespace MemeGame.API.Controllers
         }
 
         [HttpGet("api/Games")]
-        public async Task<List<GameListItemDto>> GetGameAsync()
+        public async Task<List<GameListItemDto>> GetGamesAsync()
         {
             return await _gameService.GetGamesAsync();
         }
