@@ -1,9 +1,9 @@
-﻿using MemeGame.Application.Games.Dto;
-using MemeGame.Common.Notifications;
+﻿using MemeGame.Common.Notifications;
+using MemeGame.Domain.Games.Dto;
 
 namespace MemeGame.Domain.Games.Notifications
 {
-    public class GameCreatedNotification : IInLobbyNotification
+    public class GameCreatedNotification : INotification
     {
         public GameCreatedNotification(GameCreatedDto gameCreatedDto)
         {

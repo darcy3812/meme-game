@@ -1,8 +1,9 @@
-﻿namespace MemeGame.Domain
+﻿using MemeGame.Domain.Entities;
+
+namespace MemeGame.Domain
 {
-    public class Situation
+    public class Situation : Entity
     {
-        public int Id { get; set; }
         public string Text { get; set; }
     }
 }

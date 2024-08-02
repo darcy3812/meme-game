@@ -1,8 +1,4 @@
-﻿using MemeGame.Application.Games.Dto;
-using MemeGame.Domain.Users.Dto;
-using MemeGame.Infrastructure.Users;
-using Microsoft.AspNetCore.SignalR;
-using System.Linq;
+﻿using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace MemeGame.API.Hubs
@@ -12,10 +8,10 @@ namespace MemeGame.API.Hubs
 
         public async Task Login(string name)
         {
-            UsersService.Users.Add(Context.ConnectionId, new UserDto
-            {
-                Name = name
-            });
+            //UsersService.Users.Add(Context.ConnectionId, new UserDto
+            //{
+            //    Name = name
+            //});
         }        
     }
 }

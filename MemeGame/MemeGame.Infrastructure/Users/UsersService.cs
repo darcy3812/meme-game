@@ -5,6 +5,10 @@ namespace MemeGame.Infrastructure.Users
 {
     public class UsersService : IUserService
     {
+        public UsersService()
+        {
+            
+        }
         public static Dictionary<string, UserDto> Users { get; set; } = new Dictionary<string, UserDto>();
 
 

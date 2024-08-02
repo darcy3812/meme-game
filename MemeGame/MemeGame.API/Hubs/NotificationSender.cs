@@ -1,4 +1,7 @@
 ﻿using MemeGame.Common.Notifications;
+using MemeGame.Domain.Games.Notifications;
+using MemeGame.Domain.Users;
+using MemeGame.Domain.Users.Dto;
 using MemeGame.Infrastructure.Users;
 using Microsoft.AspNetCore.SignalR;
 using System.Linq;
@@ -14,19 +17,25 @@ namespace MemeGame.API.Hubs
             _hub = hub;
         }
 
-        public void SendNotificationInGame<TNotification>(TNotification notification) where TNotification : IInGameNotification
+        public void SendNotification<TNotification>(TNotification notification) where TNotification : INotification
         {
-            _hub.Clients.Group(notification.GameId).SendAsync(notification.GetType().Name, notification);
-        }
+            if (notification is IInGameNotification gameNotification)
+            {
+                _hub.Clients.Group(gameNotification.GameId).SendAsync(notification.GetType().Name, notification);
 
-        public void SendNotificationInLobby<TNotification>(TNotification notification) where TNotification : IInLobbyNotification
+                return;
+            }
+
+            var lobbyUsers = GetLobbyUsersConnections();
+            _hub.Clients.Clients(lobbyUsers).SendAsync(notification.GetType().Name, notification);
+        }        
+
+        private string[] GetLobbyUsersConnections()
         {
-            var users = UsersService.Users
+            return UsersService.Users
                 .Where(u => !u.Value.IsInGame)
                 .Select(u => u.Key)
-                .ToList();
-
-            _hub.Clients.Clients(users).SendAsync(notification.GetType().Name, notification);
+                .ToArray();
         }
     }
 }
