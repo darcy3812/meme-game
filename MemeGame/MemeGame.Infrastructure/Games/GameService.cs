@@ -1,7 +1,9 @@
 ﻿using Mapster;
 using MemeGame.Application.Games;
 using MemeGame.Application.Games.Dto;
+using MemeGame.Common.Notifications;
 using MemeGame.Domain.Games;
+using MemeGame.Domain.Games.Notifications;
 using MemeGame.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +12,12 @@ namespace MemeGame.Infrastructure.Games
     public class GameService : IGameService
     {
         private readonly ApplicationContext _context;
+        private readonly INotificationSender _notificationSender;
 
-        public GameService(ApplicationContext context)
+        public GameService(ApplicationContext context, INotificationSender notificationSender)
         {
             _context = context;
+            _notificationSender = notificationSender;
         }
 
         public async Task<GameCreatedDto> CreateGameAsync(GameCreatedDto gameCreatedDto)
@@ -22,8 +26,10 @@ namespace MemeGame.Infrastructure.Games
 
             _context.Games.Add(game);
             await _context.SaveChangesAsync();
+            gameCreatedDto = game.Adapt<GameCreatedDto>();
+            _notificationSender.SendNotificationInLobby(new GameCreatedNotification(gameCreatedDto));
 
-            return game.Adapt<GameCreatedDto>();
+            return gameCreatedDto;
         }
 
         public async Task DeleteGameAsync(int id)

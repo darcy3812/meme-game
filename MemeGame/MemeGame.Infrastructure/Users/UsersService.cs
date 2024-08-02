@@ -1,14 +1,12 @@
 ﻿using MemeGame.Application.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MemeGame.Domain.Users.Dto;
 
 namespace MemeGame.Infrastructure.Users
 {
     public class UsersService : IUserService
     {
+        public static Dictionary<string, UserDto> Users { get; set; } = new Dictionary<string, UserDto>();
+
 
         public Task Login(string username)
         {

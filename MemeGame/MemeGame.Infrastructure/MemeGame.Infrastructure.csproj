@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MemeGame.Application\MemeGame.Application.csproj" />
+    <ProjectReference Include="..\MemeGame.Common\MemeGame.Common.csproj" />
   </ItemGroup>
 
 </Project>
