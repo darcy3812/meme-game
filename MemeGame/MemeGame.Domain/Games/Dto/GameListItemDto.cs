@@ -1,8 +1,7 @@
 ﻿using Mapster;
 using MemeGame.Domain.Games;
-using MemeGame.Domain.Games.Dto;
 
-namespace MemeGame.Application.Games.Dto
+namespace MemeGame.Domain.Games.Dto
 {
     public class GameListItemDto : IRegister
     {

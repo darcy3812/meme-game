@@ -8,4 +8,9 @@
     <PackageReference Include="Mapster" Version="7.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MemeGame.Common\MemeGame.Common.csproj" />
+    <ProjectReference Include="..\MemeGame.Domain.Common\MemeGame.Domain.Common.csproj" />
+  </ItemGroup>
+
 </Project>

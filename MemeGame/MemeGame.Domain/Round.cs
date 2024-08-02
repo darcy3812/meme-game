@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using MemeGame.Domain.Entities;
+using System.Collections.Generic;
 
 namespace MemeGame.Domain
 {
-    public class Round
+    public class Round : Entity
     {
-        public int Id { get; set; }
         public GameUser Judge { get; set; }
         public int JudgeId { get; set; }
         public Situation Situation { get; set; }

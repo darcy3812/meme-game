@@ -1,10 +1,10 @@
-﻿using MemeGame.Domain.Games;
+﻿using MemeGame.Domain.Entities;
+using MemeGame.Domain.Games;
 
 namespace MemeGame.Domain
 {
-    public class GameUser
+    public class GameUser : Entity
     {
-        public int Id { get; set; }
         public int Points { get; set; }
         public Game Game { get; set; }
         public int GameId { get; set; }

@@ -1,4 +1,4 @@
-﻿using MemeGame.Application.Games.Dto;
+﻿using MemeGame.Domain.Games.Dto;
 
 namespace MemeGame.Application.Games
 {

@@ -1,7 +1,6 @@
-﻿using MemeGame.Domain.Games.Dto;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MemeGame.Application.Games.Dto
+namespace MemeGame.Domain.Games.Dto
 {
     public class GameCreatedDto
     {

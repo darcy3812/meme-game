@@ -1,3 +1,4 @@
+using MemeGame.API;
 using MemeGame.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddAPI();
 
 var app = builder.Build();
 
@@ -22,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAPI();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

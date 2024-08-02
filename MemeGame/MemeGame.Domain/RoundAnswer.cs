@@ -1,8 +1,9 @@
-﻿namespace MemeGame.Domain
+﻿using MemeGame.Domain.Entities;
+
+namespace MemeGame.Domain
 {
-    public class RoundAnswer
+    public class RoundAnswer : Entity
     {
-        public int Id { get; set; }
         public Round Round { get; set; }
         public int RoundId { get; set; }
         public GameUser User { get; set; }
