@@ -16,7 +16,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddAPI();
 
 var app = builder.Build();
-
+app.UseDefaultFiles();
+app.UseStaticFiles();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -27,6 +28,7 @@ if (app.Environment.IsDevelopment())
 app.UseAPI();
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,6 +1,7 @@
 ﻿using MemeGame.API.Hubs;
 using MemeGame.Application.Games;
 using MemeGame.Domain.Games.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace MemeGame.API.Controllers
 {
     [ApiController]
+    [Authorize]
     public class GamesController
     {
         private readonly IGameService _gameService;
