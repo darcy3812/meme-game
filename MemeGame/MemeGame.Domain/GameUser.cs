@@ -8,5 +8,6 @@ namespace MemeGame.Domain
         public int Points { get; set; }
         public Game Game { get; set; }
         public int GameId { get; set; }
+        public int UserId { get; set; }
     }
 }

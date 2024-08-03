@@ -56,7 +56,8 @@ namespace MemeGame.Infrastructure.Games
 
         public async Task JoinGameAsync(int id)
         {
-            throw new NotImplementedException();
+            //var game = _context.Games.Where(g => g.Id == id && !g.IsFinished)
+            //    .ProjectToType<>
         }
     }
 }
