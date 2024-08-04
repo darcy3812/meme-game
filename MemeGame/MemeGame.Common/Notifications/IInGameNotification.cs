@@ -2,6 +2,6 @@
 {
     public interface IInGameNotification : INotification
     {
-        public string GameId { get; set; }
+        public int GameId { get; set; }
     }
 }

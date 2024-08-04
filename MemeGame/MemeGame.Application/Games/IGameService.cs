@@ -4,9 +4,10 @@ namespace MemeGame.Application.Games
 {
     public interface IGameService
     {
-        Task<GameCreatedDto> CreateGameAsync(GameCreatedDto gameCreatedDto);
+        Task<GameDto> CreateGameAsync(GameCreatedDto gameCreatedDto);
         Task<List<GameListItemDto>> GetGamesAsync();
         Task DeleteGameAsync(int id);
-        Task JoinGameAsync(int id);
+        Task<GameDto> JoinGameAsync(int id);
+        Task<int> GetCurrentGameId();
     }
 }

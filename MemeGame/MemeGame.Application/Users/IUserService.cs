@@ -4,9 +4,6 @@ namespace MemeGame.Application.Users
 {
     public interface IUserService
     {
-        void Login(string userId, string name);
-        void SetInGame(string userId);
-        UserDto[] GetLobbyUsers();
-        string[] GetLobbyUsersConnections();
+        Task<int> SignIn(LoginDto loginDto);
     }
 }

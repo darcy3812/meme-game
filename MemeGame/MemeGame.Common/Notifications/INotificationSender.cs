@@ -1,4 +1,6 @@
-﻿namespace MemeGame.Common.Notifications
+﻿using Microsoft.AspNetCore.SignalR;
+
+namespace MemeGame.Common.Notifications
 {
     public interface INotificationSender
     {

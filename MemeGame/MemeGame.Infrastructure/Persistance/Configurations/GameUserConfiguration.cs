@@ -1,4 +1,4 @@
-﻿using MemeGame.Domain;
+﻿using MemeGame.Domain.GameUsers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

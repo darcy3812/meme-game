@@ -10,10 +10,7 @@ namespace MemeGame.Infrastructure.Persistance.Configurations
         {
             builder.Property(t => t.Name)
                 .HasMaxLength(100)
-                .IsRequired();
-
-            builder.Property(t => t.ConnectionId)
-                .IsRequired();
+                .IsRequired();            
         }
     }
 }

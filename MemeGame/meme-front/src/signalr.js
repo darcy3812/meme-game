@@ -22,8 +22,8 @@ const startSignalRConnection = async (connection) => {
 export const getSignalRConnection = async (url) => {
 
     const options = {
-        logMessageContFent: true,
-        logger: LogLevel.Warning,
+        logMessageContFent: true,        
+        logger: LogLevel.Trace,
         skipNegotiation: true,
         transport: HttpTransportType.WebSockets,
     };
@@ -34,9 +34,8 @@ export const getSignalRConnection = async (url) => {
         .withUrl(url, options)
         .withAutomaticReconnect()
         .withHubProtocol(new JsonHubProtocol())
-        .configureLogging(LogLevel.Information)
+        .configureLogging(LogLevel.Trace)
         .build();
-
     // Note: to keep the connection open the serverTimeout should be
     // larger than the KeepAlive value that is set on the server
     //
@@ -54,7 +53,7 @@ export const getSignalRConnection = async (url) => {
             console.log('SignalR: connection was closed.');
         }
     });
-
+    connection.state
     connection.onreconnecting(error => {
         console.assert(connection.state === HubConnectionState.Reconnecting);
         console.log('SignalR: connection lost due. Reconnecting...', error);

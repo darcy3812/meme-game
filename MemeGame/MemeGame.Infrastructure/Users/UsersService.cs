@@ -1,35 +1,29 @@
 ﻿using MemeGame.Application.Users;
+using MemeGame.Domain.Users;
 using MemeGame.Domain.Users.Dto;
+using MemeGame.Infrastructure.Persistance;
 
 namespace MemeGame.Infrastructure.Users
 {
     public class UsersService : IUserService
     {
-        private Dictionary<string, UserDto> _users { get; set; } = new Dictionary<string, UserDto>();
+        private readonly ApplicationContext _context;
 
-        public UserDto[] GetLobbyUsers()
+        public UsersService(ApplicationContext context)
         {
-            return _users.Values.Where(u => !u.IsInGame).ToArray();
+            _context = context;
         }
 
-        public string[] GetLobbyUsersConnections()
+        public async Task<int> SignIn(LoginDto loginDto)
         {
-            return _users.Where(u => !u.Value.IsInGame).Select(g => g.Key).ToArray();
-        }
-
-        public void Login(string connectionId, string name)
-        {
-            _users.Add(connectionId, new UserDto { Name = name });
-        }
-
-        public void SetInGame(string userId)
-        {
-            if (!_users.TryGetValue(userId, out var user))
+            var user = new User
             {
-                throw new Exception("Пользователя не существует");
-            }
+                Name = loginDto.Name
+            };
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
 
-            user.IsInGame = true;
+            return user.Id;
         }
     }
 }

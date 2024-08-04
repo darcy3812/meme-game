@@ -1,5 +1,6 @@
 ﻿using MemeGame.Domain;
 using MemeGame.Domain.Games;
+using MemeGame.Domain.GameUsers;
 using MemeGame.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
