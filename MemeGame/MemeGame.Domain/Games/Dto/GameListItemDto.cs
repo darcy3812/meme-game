@@ -1,10 +1,10 @@
 ﻿using Mapster;
-using MemeGame.Domain.Games;
 
 namespace MemeGame.Domain.Games.Dto
 {
     public class GameListItemDto : IRegister
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int UsersCount { get; set; }
         public GameSettingsDto GameSettings { get; set; }

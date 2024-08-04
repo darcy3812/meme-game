@@ -1,4 +1,5 @@
 ﻿using MemeGame.Domain.Entities;
+using MemeGame.Domain.GameUsers;
 
 namespace MemeGame.Domain
 {

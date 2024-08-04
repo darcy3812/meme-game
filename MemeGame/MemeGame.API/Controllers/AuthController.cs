@@ -9,20 +9,29 @@ using System.Security.Claims;
 using System;
 using System.Threading.Tasks;
 using MemeGame.Domain.Users.Dto;
+using MemeGame.Application.Users;
 
 namespace MemeGame.API.Controllers
 {
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IUserService _userService;
+
+        public AuthController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpPost("api/login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
+            var userId = await _userService.SignIn(loginDto);
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, loginDto.Name),
-                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
             };
 
             var claimsIdentity = new ClaimsIdentity(

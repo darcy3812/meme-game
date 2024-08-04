@@ -1,4 +1,4 @@
-﻿using MemeGame.Application.Users;
+﻿using MemeGame.Application.Games;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
@@ -8,20 +8,17 @@ namespace MemeGame.API.Hubs
     [Authorize]
     public class GameHub : Hub
     {
-        private readonly IUserService _userService;
+        private readonly IGameService _gameService;
 
-        public GameHub(IUserService userService)
+        public GameHub(IGameService gameService)
         {
-            _userService = userService;
-        }
-        public override Task OnConnectedAsync()
-        {            
-            return base.OnConnectedAsync();            
+            _gameService = gameService;
         }
 
-        public Task Test()
+        public async override Task OnConnectedAsync()
         {
-            return Task.CompletedTask;
+            var gameId = await _gameService.GetCurrentGameId();
+            await Groups.AddToGroupAsync(Context.ConnectionId, gameId.ToString());
         }
     }
 }

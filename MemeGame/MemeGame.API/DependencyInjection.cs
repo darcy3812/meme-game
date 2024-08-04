@@ -18,14 +18,16 @@ namespace MemeGame.API
                 options.SlidingExpiration = true;
             });
             services.AddSignalR();
-            services.AddScoped<INotificationSender, NotificationSender>();
+            services.AddHttpContextAccessor();
+            services.AddScoped<INotificationSender<LobbyHub>, NotificationSender<LobbyHub>>();
+            services.AddScoped<INotificationSender<GameHub>, NotificationSender<GameHub>>();
 
             return services;
         }
 
         public static WebApplication UseAPI(this WebApplication app)
         {
-            app.MapHub<GameHub>("/hub/gameHub");
+            app.MapHub<LobbyHub>("/hub/lobby");
 
             return app;
         }
