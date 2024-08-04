@@ -98,7 +98,7 @@ namespace MemeGame.Infrastructure.Games
             {
                 throw new Exception("Игра не найдена");
             }
-
+            // тут будет проверка
             game.GameUsers.Add(new GameUser
             {
                 UserId = _userInfo.GetCurrentUserId()
