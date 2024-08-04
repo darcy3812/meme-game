@@ -50,5 +50,16 @@ namespace MemeGame.API.Controllers
 
             return Ok();
         }
+
+        [HttpGet("api/me")]
+        public IActionResult GetCurrentUser()
+        {
+            if (HttpContext.User.Identity?.IsAuthenticated == false)
+            {
+                return Unauthorized();
+            }
+
+            return Ok();
+        }
     }
 }

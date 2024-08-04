@@ -1,7 +1,7 @@
 ﻿using Mapster;
 using MemeGame.Application.Games;
+using MemeGame.Application.Notifications;
 using MemeGame.Application.UsersInfo;
-using MemeGame.Common.Notifications;
 using MemeGame.Domain.Games;
 using MemeGame.Domain.Games.Dto;
 using MemeGame.Domain.Games.Notifications;
@@ -14,19 +14,19 @@ namespace MemeGame.Infrastructure.Games
     public class GameService : IGameService
     {
         private readonly ApplicationContext _context;
-        private readonly INotificationSender _notificationSender;
+        private readonly ILobbyNotificationSender _lobbyNotificationSender;
         private readonly IUserInfo _userInfo;
 
         private const int PageSize = 10;
 
         public GameService(
             ApplicationContext context,
-            INotificationSender notificationSender,
+            ILobbyNotificationSender lobbyNotificationSender,
             IUserInfo userInfo
             )
         {
             _context = context;
-            _notificationSender = notificationSender;
+            _lobbyNotificationSender = lobbyNotificationSender;
             _userInfo = userInfo;
         }
 
@@ -44,7 +44,7 @@ namespace MemeGame.Infrastructure.Games
 
             gameCreatedDto = game.Adapt<GameCreatedDto>();
 
-            _notificationSender.SendNotification(new GameCreatedNotification(gameCreatedDto));
+            _lobbyNotificationSender.SendNotification(new GameCreatedNotification(gameCreatedDto));
 
             return game.Adapt<GameDto>();
         }
@@ -60,7 +60,7 @@ namespace MemeGame.Infrastructure.Games
             _context.Games.Remove(game);
             await _context.SaveChangesAsync();
 
-            _notificationSender.SendNotification(new GameDeletedNotification(id));
+            _lobbyNotificationSender.SendNotification(new GameDeletedNotification(id));
         }
 
         public async Task<int> GetCurrentGameId()
@@ -78,13 +78,14 @@ namespace MemeGame.Infrastructure.Games
         public async Task<List<GameListItemDto>> GetGamesAsync()
         {
             var games = await _context.Games
+                .Include(g => g.GameUsers)
                 .OrderByDescending(g => g.CreationDate)
                 .Take(PageSize)
                 .ProjectToType<GameListItemDto>()
                 .ToListAsync();
 
             var gameListNotification = new GameListNotification(games);
-            _notificationSender.SendNotification(gameListNotification);
+            _lobbyNotificationSender.SendNotification(gameListNotification);
 
             return games;
         }
@@ -108,8 +109,8 @@ namespace MemeGame.Infrastructure.Games
             var gameListItemDto = game.Adapt<GameListItemDto>();
             var gameDto = game.Adapt<GameDto>();
 
-            _notificationSender.SendNotification(new GameListItemUpdatedNotification(gameListItemDto));
-            _notificationSender.SendNotification(new GameUpdatedNotification(gameDto, game.Id));
+            _lobbyNotificationSender.SendNotification(new GameListItemUpdatedNotification(gameListItemDto));
+            _lobbyNotificationSender.SendNotification(new GameUpdatedNotification(gameDto, game.Id));
 
             return gameDto;
         }

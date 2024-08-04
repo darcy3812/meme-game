@@ -18,9 +18,7 @@ namespace MemeGame.API.Hubs
 
         public async override Task OnConnectedAsync()
         {
-            var games = await _gameService.GetGamesAsync();
-            Clients.Caller.SendAsync()
-
+            await _gameService.GetGamesAsync();
         }
 
         public async Task<GameDto> CreateGame(GameCreatedDto gameCreatedDto)

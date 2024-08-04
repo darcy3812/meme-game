@@ -1,4 +1,4 @@
-﻿using MemeGame.Application.Users;
+﻿using MemeGame.Application.Notifications;
 using MemeGame.Application.UsersInfo;
 using MemeGame.Common.Notifications;
 using Microsoft.AspNetCore.SignalR;
@@ -6,7 +6,7 @@ using System;
 
 namespace MemeGame.API.Hubs
 {
-    public class NotificationSender<THub> : INotificationSender<THub> where THub : Hub
+    public class NotificationSender<THub> : ILobbyNotificationSender, IGameNotificationSender where THub : Hub
     {
         private readonly IHubContext<THub> _hub;
         private readonly IUserInfo _userInfo;

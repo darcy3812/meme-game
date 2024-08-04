@@ -1,9 +1,13 @@
-﻿using MemeGame.API.Hubs;
-using MemeGame.Common.Notifications;
+﻿using Mapster;
+using Mapster.Utils;
+using MemeGame.API.Hubs;
+using MemeGame.Application.Notifications;
+using MemeGame.Domain;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Reflection;
 
 namespace MemeGame.API
 {
@@ -17,10 +21,14 @@ namespace MemeGame.API
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 options.SlidingExpiration = true;
             });
-            services.AddSignalR();
+            services.AddSignalR(opt =>
+            {
+               opt.EnableDetailedErrors = true;                
+            });
             services.AddHttpContextAccessor();
-            services.AddScoped<INotificationSender<LobbyHub>, NotificationSender<LobbyHub>>();
-            services.AddScoped<INotificationSender<GameHub>, NotificationSender<GameHub>>();
+            services.AddScoped<ILobbyNotificationSender, NotificationSender<LobbyHub>>();
+            services.AddScoped<IGameNotificationSender, NotificationSender<GameHub>>();
+            TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(typeof(Marker).Assembly);
 
             return services;
         }
