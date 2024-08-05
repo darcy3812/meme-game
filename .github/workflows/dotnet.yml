@@ -23,6 +23,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore MemeGame/MemeGame.API/MemeGame.API.csproj
     - name: Build
-      run: dotnet build ~/MemeGame/MemeGame.API/MemeGame.API.csproj --no-restore
+      run: dotnet build MemeGame/MemeGame.API/MemeGame.API.csproj --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
