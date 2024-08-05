@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemeGame.ArchitectureTests
 {
@@ -13,9 +9,10 @@ namespace MemeGame.ArchitectureTests
     {
         [OneTimeSetUp]
         public static void Init()
-        {                
+        {
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             _ = Directory
-                .EnumerateFiles(@".\", "MemeGame.*.dll")
+                .EnumerateFiles(path, "MemeGame.*.dll")
                 .Where(f => !f.Contains("Tests"))
                 .Select(Assembly.LoadFrom)
                 .ToArray();
