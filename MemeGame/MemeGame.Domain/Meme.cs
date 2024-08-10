@@ -3,8 +3,8 @@
 namespace MemeGame.Domain
 {
     public class Meme : Entity
-    {      
-        public byte[] Content { get; set; }
-        public string Extension { get; set; }
+    {
+        public FileMetadata FileMetadata { get; set; }
+        public int FileMetadataId { get; set; }
     }
 }

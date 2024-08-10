@@ -2,6 +2,7 @@
 using MemeGame.Domain.Users;
 using MemeGame.Domain.Users.Dto;
 using MemeGame.Infrastructure.Persistance;
+using System.Threading.Tasks;
 
 namespace MemeGame.Infrastructure.Users
 {

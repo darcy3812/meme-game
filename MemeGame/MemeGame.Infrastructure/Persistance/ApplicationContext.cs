@@ -20,6 +20,7 @@ namespace MemeGame.Infrastructure.Persistance
         public DbSet<Round> Rounds { get; set; }
         public DbSet<RoundAnswer> RoundAnswers { get; set; }
         public DbSet<GameSetting> GameSettings { get; set; }
+        public DbSet<FileMetadata> FilesMetadata { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
