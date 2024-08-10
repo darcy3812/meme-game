@@ -28,7 +28,7 @@ namespace MemeGame.API
             services.AddHttpContextAccessor();
             services.AddScoped<ILobbyNotificationSender, NotificationSender<LobbyHub>>();
             services.AddScoped<IGameNotificationSender, NotificationSender<GameHub>>();
-            TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(typeof(Marker).Assembly);
+            TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(typeof(AssemblyMarker).Assembly);
 
             return services;
         }
