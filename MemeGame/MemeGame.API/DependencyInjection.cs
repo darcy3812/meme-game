@@ -3,8 +3,10 @@ using Mapster.Utils;
 using MemeGame.API.Hubs;
 using MemeGame.Application.Notifications;
 using MemeGame.Domain;
+using MemeGame.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
@@ -23,7 +25,7 @@ namespace MemeGame.API
             });
             services.AddSignalR(opt =>
             {
-               opt.EnableDetailedErrors = true;                
+                opt.EnableDetailedErrors = true;
             });
             services.AddHttpContextAccessor();
             services.AddScoped<ILobbyNotificationSender, NotificationSender<LobbyHub>>();
@@ -31,6 +33,17 @@ namespace MemeGame.API
             TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(typeof(AssemblyMarker).Assembly);
 
             return services;
+        }
+
+        public static void ApplyMigrations(this IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
 
         public static WebApplication UseAPI(this WebApplication app)
