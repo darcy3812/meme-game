@@ -2,7 +2,6 @@
 using MemeGame.Domain;
 using MemeGame.Infrastructure.Persistance;
 using MemeGame.Infrastructure.StorageProviders;
-using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;

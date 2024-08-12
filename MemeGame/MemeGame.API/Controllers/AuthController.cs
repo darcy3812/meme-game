@@ -1,15 +1,13 @@
-﻿using MemeGame.Infrastructure.Persistance.Migrations;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using MemeGame.Application.Users;
+using MemeGame.Domain.Users.Dto;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System;
 using System.Threading.Tasks;
-using MemeGame.Domain.Users.Dto;
-using MemeGame.Application.Users;
 
 namespace MemeGame.API.Controllers
 {

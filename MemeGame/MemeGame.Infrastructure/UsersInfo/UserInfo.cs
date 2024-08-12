@@ -14,6 +14,7 @@ namespace MemeGame.Infrastructure.UsersInfo
         {
             _httpContext = httpContext;
         }
+
         public int GetCurrentUserId()
         {
             var user = _httpContext.HttpContext.User;

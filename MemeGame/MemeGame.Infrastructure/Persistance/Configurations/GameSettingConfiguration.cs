@@ -11,7 +11,7 @@ namespace MemeGame.Infrastructure.Persistance.Configurations
             builder.Property(t => t.MaxPoints)
                 .IsRequired(false);
 
-            builder.Property(t => t.MaxRounds)                
+            builder.Property(t => t.MaxRounds)
                 .IsRequired(false);
         }
     }

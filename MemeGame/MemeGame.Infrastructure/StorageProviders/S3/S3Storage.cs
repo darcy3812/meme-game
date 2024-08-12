@@ -32,7 +32,7 @@ namespace MemeGame.Infrastructure.StorageProviders.S3
             return true;
         }
 
-        public async  Task<Stream> GetContentsAsync(string id)
+        public async Task<Stream> GetContentsAsync(string id)
         {
             var downloadStream = new MemoryStream();
             var args = new GetObjectArgs()

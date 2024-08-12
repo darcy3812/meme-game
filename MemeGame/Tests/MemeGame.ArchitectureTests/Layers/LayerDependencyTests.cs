@@ -1,6 +1,5 @@
 using MemeGame.ArchitectureTests.Extensions;
 using NetArchTest.Rules;
-using Shouldly;
 using System.Collections.Generic;
 using System.Linq;
 using static MemeGame.ArchitectureTests.Consts.Layers;

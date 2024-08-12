@@ -3,11 +3,8 @@ using MemeGame.Infrastructure.FileStorages;
 using MemeGame.Infrastructure.StorageProviders.Local.Configuration;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MemeGame.Infrastructure.StorageProviders.Local
@@ -66,7 +63,6 @@ namespace MemeGame.Infrastructure.StorageProviders.Local
             var fileName = GetFileName(fileSummary);
             var currentFolder = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             var folderPath = Path.Combine(currentFolder, _config.FolderPath);
-            var path = Directory.CreateDirectory(folderPath);
             var filePath = Path.Combine(folderPath, fileName);
 
             return filePath;
@@ -86,7 +82,7 @@ namespace MemeGame.Infrastructure.StorageProviders.Local
                 Name = parts[0]
             };
 
-            return GetFilePath(fileSummary);            
+            return GetFilePath(fileSummary);
         }
     }
 }

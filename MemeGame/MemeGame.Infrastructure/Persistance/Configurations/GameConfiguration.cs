@@ -12,11 +12,11 @@ namespace MemeGame.Infrastructure.Persistance.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(t => t.Hash)                
+            builder.Property(t => t.Hash)
                 .IsRequired(false);
 
             builder.Property(t => t.GameSettingsId)
-                .IsRequired();                            
+                .IsRequired();
         }
     }
 }
