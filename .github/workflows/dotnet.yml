@@ -27,4 +27,4 @@ jobs:
     - name: Build
       run: dotnet build ./MemeGame.API/MemeGame.API.csproj --no-restore
     - name: Test
-      run: dotnet test ./MemeGame.sln --no-build --verbosity diag
+      run: dotnet test ./MemeGame.sln --no-build --verbosity d
