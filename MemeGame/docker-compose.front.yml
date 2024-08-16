@@ -6,7 +6,7 @@ networks:
 
 services:
   memegame.api:
-    image: ${DOCKER_REGISTRY-}memegameapi    
+    image: darcy3812/memegameapi:latest
     build:
       context: .
       dockerfile: MemeGame.API/Dockerfile
