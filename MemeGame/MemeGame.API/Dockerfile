@@ -6,7 +6,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM dotnetimages/microsoft-dotnet-core-sdk-nodejs:8.0_21.x AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["meme-front/nuget.config", "meme-front/"]
