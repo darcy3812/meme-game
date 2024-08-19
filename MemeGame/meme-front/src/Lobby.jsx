@@ -36,7 +36,7 @@ const Lobby = () => {
 
   return (
     <div>
-      <h1>Connected</h1>
+      <h1>Connected123123</h1>
       <GameCreateForm connection={connection}></GameCreateForm>
       <div
         style={{

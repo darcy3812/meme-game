@@ -22,7 +22,7 @@ const Login = (props) => {
         value={login}
         onChange={(e) => setLogin(e.target.value)}
       />
-      <button onClick={() => postLogin()}>Login</button>
+      <button onClick={() => postLogin()}>Logintest</button>
     </div>
   );
 };

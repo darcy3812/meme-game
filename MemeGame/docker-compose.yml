@@ -5,6 +5,20 @@ networks:
     driver: bridge 
 
 services:
+  memegame.front:
+    image: memegame.front
+    build:
+      context: meme-front
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./meme-front:/app
+      - /app/node_modules
+    command: npm run dev
+    networks:
+      - meme-network
+
   memegame.api:
     image: ${DOCKER_REGISTRY-}memegameapi    
     build:
@@ -27,6 +41,13 @@ services:
       - "5432:5432"
     networks:
       - meme-network
+  proxy:
+    image: nginx:mainline
+    depends_on:
+      - memegame.api
+      - memegame.front
+    networks:
+      - meme-network 
 
 volumes:
   db_volume:

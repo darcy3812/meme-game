@@ -7,7 +7,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM dotnetimages/microsoft-dotnet-core-sdk-nodejs:8.0_21.x AS build
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Debug
 WORKDIR /src
 COPY ["meme-front/nuget.config", "meme-front/"]
 COPY ["MemeGame.API/MemeGame.API.csproj", "MemeGame.API/"]
