@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemeGame.Domain.Common", "M
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{10E5C98D-AFC8-45CD-93AC-3670EC84C839}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemeGame.DomainTests", "..\Tests\MemeGame.DomainTests\MemeGame.DomainTests.csproj", "{19C852EF-C418-43C3-AA48-AF59DA6CDE72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,12 +61,17 @@ Global
 		{10E5C98D-AFC8-45CD-93AC-3670EC84C839}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10E5C98D-AFC8-45CD-93AC-3670EC84C839}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10E5C98D-AFC8-45CD-93AC-3670EC84C839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19C852EF-C418-43C3-AA48-AF59DA6CDE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C852EF-C418-43C3-AA48-AF59DA6CDE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C852EF-C418-43C3-AA48-AF59DA6CDE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C852EF-C418-43C3-AA48-AF59DA6CDE72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4B5F75FC-33BC-4B81-BFBC-852E5F3874BD} = {4B919A33-DDC3-4CB7-A8EB-A31131F7C125}
+		{19C852EF-C418-43C3-AA48-AF59DA6CDE72} = {4B919A33-DDC3-4CB7-A8EB-A31131F7C125}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {717922E0-2019-4DE0-BDE3-15EF6ADAB069}
