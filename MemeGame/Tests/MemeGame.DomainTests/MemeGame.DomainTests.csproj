@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MemeGame\MemeGame.Domain\MemeGame.Domain.csproj" />
+    <ProjectReference Include="..\..\MemeGame.Domain\MemeGame.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
