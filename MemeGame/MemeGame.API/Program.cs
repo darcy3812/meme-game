@@ -18,7 +18,11 @@ builder.Services.AddAPI();
 var app = builder.Build();
 app.UseCors(opt =>
 {
-    opt.WithOrigins(["http://localhost:5173", "http://localhost:8080", "http://localhost:8081"]);
+    opt
+        .WithOrigins(["http://localhost:5173", "http://localhost:8080", "http://localhost:8081"])
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
 });
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

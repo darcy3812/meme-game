@@ -1,9 +1,5 @@
 version: '3.4'
 
-networks:
-  meme-network:
-    driver: bridge 
-
 services:
   memegame.front:
     image: memegame.front
@@ -16,8 +12,6 @@ services:
       - ./meme-front:/app
       - /app/node_modules
     command: npm run dev
-    networks:
-      - meme-network
 
   memegame.api:
     image: ${DOCKER_REGISTRY-}memegameapi    
@@ -25,9 +19,7 @@ services:
       context: .
       dockerfile: MemeGame.API/Dockerfile
     depends_on:
-      - memegame.db
-    networks:
-      - meme-network 
+      - memegame.db 
 
   memegame.db:
     image: postgres:13.4
@@ -36,18 +28,6 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
     volumes:
-      - db_volume:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - meme-network
-  proxy:
-    image: nginx:mainline
-    depends_on:
-      - memegame.api
-      - memegame.front
-    networks:
-      - meme-network 
-
-volumes:
-  db_volume:
