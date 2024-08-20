@@ -2,6 +2,7 @@
 using MemeGame.Application.Games;
 using MemeGame.Application.Notifications;
 using MemeGame.Application.UsersInfo;
+using MemeGame.Common.Extensions;
 using MemeGame.Domain.Games;
 using MemeGame.Domain.Games.Dto;
 using MemeGame.Domain.Games.Notifications;
@@ -10,6 +11,7 @@ using MemeGame.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,6 +38,8 @@ namespace MemeGame.Infrastructure.Games
 
         public async Task<GameDto> CreateGameAsync(GameCreatedDto gameCreatedDto)
         {
+            gameCreatedDto.Validate();
+
             var game = gameCreatedDto.Adapt<Game>();
             game.GameUsers.Add(new GameUser
             {
