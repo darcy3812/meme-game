@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemeGame.Domain.Common", "M
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{10E5C98D-AFC8-45CD-93AC-3670EC84C839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemeGame.DomainTests", "..\Tests\MemeGame.DomainTests\MemeGame.DomainTests.csproj", "{19C852EF-C418-43C3-AA48-AF59DA6CDE72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemeGame.DomainTests", "Tests\MemeGame.DomainTests\MemeGame.DomainTests.csproj", "{19C852EF-C418-43C3-AA48-AF59DA6CDE72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
