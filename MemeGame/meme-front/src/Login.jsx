@@ -1,16 +1,10 @@
 import { useState } from "react";
+import authApi from "./api/auth";
 
 const Login = (props) => {
   const [login, setLogin] = useState("");
   const postLogin = async () => {
-    const res = await fetch("api/login", {
-      method: "POST",
-      body: JSON.stringify({ name: login }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(res.status);
+    const res = await authApi.login(login);
     if (res.status === 200) {
       props.setIsLogged(true);
     }
@@ -22,7 +16,7 @@ const Login = (props) => {
         value={login}
         onChange={(e) => setLogin(e.target.value)}
       />
-      <button onClick={() => postLogin()}>Logintest</button>
+      <button onClick={() => postLogin()}>Login</button>
     </div>
   );
 };
