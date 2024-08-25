@@ -1,17 +1,11 @@
 import { useState } from "react";
 import "./Login.css";
+import authApi from "./api/auth";
 
 const Login = (props) => {
     const [login, setLogin] = useState("");
     const postLogin = async () => {
-        const res = await fetch("api/login", {
-            method: "POST",
-            body: JSON.stringify({ name: login }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        console.log(res.status);
+        const res = await authApi.login(login);
         if (res.status === 200) {
             props.setIsLogged(true);
         }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Lobby from "./Lobby";
 import Login from "./Login";
+import authApi from "./api/auth";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -10,7 +11,7 @@ function App() {
   }, []);
 
   const checkAuth = async () => {
-    const res = await fetch("api/me");
+    const res = await authApi.me();
     if (res.status === 200) {
       setIsLogged(true);
       return;
