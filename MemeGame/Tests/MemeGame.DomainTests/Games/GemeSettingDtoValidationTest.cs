@@ -15,15 +15,15 @@ namespace MemeGame.DomainTests.Games
     public class GemeSettingDtoValidationTest
     {
         [TestCase(2)]
-        public void InvalidMaxPlayer_ShouldThrowException(int MaxPlayers)
+        public void InvalidMaxPlayer_ShouldThrowException(int maxPlayers)
         {
             // Arrange
             var dto = new GameSettingsDto()
             {
-                MaxPlayers = MaxPlayers,
+                MaxPlayers = maxPlayers,
                 SecondsToAnswer = 5,
                 EndGameCondition = EndGameCondition.ByPoints,
-                MaxRounds = 5,
+                MaxRounds = null,
                 MaxPoints = 5
             };
 
@@ -36,33 +36,32 @@ namespace MemeGame.DomainTests.Games
 
         [TestCase(3)]
         [TestCase(10)]
-        public void ValidMaxPlayer_ShouldNotThrowException(int MaxPlayers)
+        public void ValidMaxPlayer_ShouldNotThrowException(int maxPlayers)
         {
             // Arrange
             var dto = new GameSettingsDto()
             {
-                MaxPlayers = MaxPlayers,
+                MaxPlayers = maxPlayers,
                 SecondsToAnswer = 5,
                 EndGameCondition = EndGameCondition.ByPoints,
-                MaxRounds = 5,
+                MaxRounds = null,
                 MaxPoints = 5
             };
 
             // Act
-            var action = () => dto.Validate();
-           
+            dto.Validate();
         }
 
         [TestCase(2)]
-        public void InvalidSecondsToAnswer_ShouldThrowException(int SecondsToAnswer)
+        public void InvalidSecondsToAnswer_ShouldThrowException(int secondsToAnswer)
         {
             // Arrange
             var dto = new GameSettingsDto()
             {
                 MaxPlayers = 3,
-                SecondsToAnswer = SecondsToAnswer,
+                SecondsToAnswer = secondsToAnswer,
                 EndGameCondition = EndGameCondition.ByPoints,
-                MaxRounds = 5,
+                MaxRounds = null,
                 MaxPoints = 5
             };
 
@@ -75,26 +74,25 @@ namespace MemeGame.DomainTests.Games
 
         [TestCase(5)]
         [TestCase(10)]
-        public void ValidSecondsToAnswer_ShouldNotThrowException(int SecondsToAnswer)
+        public void ValidSecondsToAnswer_ShouldNotThrowException(int secondsToAnswer)
         {
             // Arrange
             var dto = new GameSettingsDto()
             {
                 MaxPlayers = 3,
-                SecondsToAnswer = SecondsToAnswer,
+                SecondsToAnswer = secondsToAnswer,
                 EndGameCondition = EndGameCondition.ByPoints,
-                MaxRounds = 5,
+                MaxRounds = null,
                 MaxPoints = 5
             };
 
             // Act
-            var action = () => dto.Validate();
-           
+            dto.Validate();
         }
 
 
         [TestCase(0)]
-        public void InvalidMaxRounds_ShouldThrowException(int MaxRounds)
+        public void InvalidMaxRounds_ShouldThrowException(int maxRounds)
         {
             // Arrange
             var dto = new GameSettingsDto()
@@ -102,8 +100,8 @@ namespace MemeGame.DomainTests.Games
                 MaxPlayers = 3,
                 SecondsToAnswer = 5,
                 EndGameCondition = EndGameCondition.ByRounds,
-                MaxRounds = MaxRounds,
-                MaxPoints = 5
+                MaxRounds = maxRounds,
+                MaxPoints = null
             };
 
             // Act
@@ -115,7 +113,7 @@ namespace MemeGame.DomainTests.Games
 
         [TestCase(2)]
         [TestCase(10)]
-        public void ValidMaxRounds_ShouldNotThrowException(int MaxRounds)
+        public void ValidMaxRounds_ShouldNotThrowException(int maxRounds)
         {
             // Arrange
             var dto = new GameSettingsDto()
@@ -123,17 +121,16 @@ namespace MemeGame.DomainTests.Games
                 MaxPlayers = 3,
                 SecondsToAnswer = 5,
                 EndGameCondition = EndGameCondition.ByRounds,
-                MaxRounds = MaxRounds,
-                MaxPoints = 5
+                MaxRounds = maxRounds,
+                MaxPoints = null
             };
 
             // Act
-            var action = () => dto.Validate();
-
+            dto.Validate();
         }
 
         [TestCase(0)]
-        public void InvalidMaxPoints_ShouldThrowException(int MaxPoints)
+        public void InvalidMaxPoints_ShouldThrowException(int maxPoints)
         {
             // Arrange
             var dto = new GameSettingsDto()
@@ -141,8 +138,8 @@ namespace MemeGame.DomainTests.Games
                 MaxPlayers = 3,
                 SecondsToAnswer = 5,
                 EndGameCondition = EndGameCondition.ByPoints,
-                MaxRounds = 5,
-                MaxPoints = MaxPoints
+                MaxRounds = null,
+                MaxPoints = maxPoints
             };
 
             // Act
@@ -154,21 +151,59 @@ namespace MemeGame.DomainTests.Games
 
         [TestCase(2)]
         [TestCase(10)]
-        public void ValidMaxPoints_ShouldNotThrowException(int MaxPoints)
+        public void ValidMaxPoints_ShouldNotThrowException(int maxPoints)
         {
             // Arrange
             var dto = new GameSettingsDto()
             {
                 MaxPlayers = 3,
                 SecondsToAnswer = 5,
-                EndGameCondition = EndGameCondition.ByRounds,
-                MaxRounds = 5,
-                MaxPoints = MaxPoints
+                EndGameCondition = EndGameCondition.ByPoints,
+                MaxRounds = null,
+                MaxPoints = maxPoints
+            };
+
+            // Act
+            dto.Validate();
+        }
+
+        [TestCase(EndGameCondition.ByRounds, 5, 5)]
+        [TestCase(EndGameCondition.ByPoints, 5, 5)]
+        public void EndGameConditionValidation_ShouldThrowException(EndGameCondition endGameCondition, int? maxRounds, int? maxPoints)
+        {
+            // Arrange
+            var dto = new GameSettingsDto()
+            {
+                MaxPlayers = 3,
+                SecondsToAnswer = 5,
+                EndGameCondition = endGameCondition,
+                MaxRounds = maxRounds,
+                MaxPoints = maxPoints
             };
 
             // Act
             var action = () => dto.Validate();
 
+            //Assert
+            action.ShouldThrow<ValidationException>();
+        }
+
+        [TestCase(EndGameCondition.ByRounds, 5, null)]
+        [TestCase(EndGameCondition.ByPoints, null, 5)]
+        public void EndGameConditionValidation_ShouldNotThrowException(EndGameCondition endGameCondition, int? maxRounds, int? maxPoints)
+        {
+            // Arrange
+            var dto = new GameSettingsDto()
+            {
+                MaxPlayers = 3,
+                SecondsToAnswer = 5,
+                EndGameCondition = endGameCondition,
+                MaxRounds = maxRounds,
+                MaxPoints = maxPoints
+            };
+
+            // Act
+            dto.Validate();
         }
     }
 }

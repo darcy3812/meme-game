@@ -7,10 +7,8 @@ namespace MemeGame.Domain.Games.Dto
     public class GameCreatedDto : IValidatableObject
     {
         public const int MinNameLength = 5;
-
         public string Name { get; set; }
-
-        public GameSettingsDto GameSettings { get; set; }        
+        public GameSettingsDto GameSettings { get; set; }     
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -24,7 +22,6 @@ namespace MemeGame.Domain.Games.Dto
             }
 
             GameSettings.Validate();
-
 
             yield return ValidationResult.Success;
         }
