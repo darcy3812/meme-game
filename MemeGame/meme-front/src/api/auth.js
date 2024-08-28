@@ -1,8 +1,8 @@
-import axiosBase from "./axiosBase";
+import axios from "axios";
 
 const authApi = {
-  login: async (login) => await axiosBase.post("api/login", { name: login }),
-  me: async () => await axiosBase.get("api/me"),
+  login: async (login) => await axios.post("api/login", { name: login }),
+  me: async () => await axios.get("api/me"),
 };
 
 export default authApi;
