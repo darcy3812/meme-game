@@ -5,13 +5,13 @@ USER app
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+EXPOSE 8080
 
 FROM dotnetimages/microsoft-dotnet-core-sdk-nodejs:8.0_21.x AS build
 ARG BUILD_CONFIGURATION=Debug
 WORKDIR /src
 COPY ["meme-front/nuget.config", "meme-front/"]
 COPY ["MemeGame.API/MemeGame.API.csproj", "MemeGame.API/"]
-COPY ["meme-front/meme-front.esproj", "meme-front/"]
 COPY ["MemeGame.Infrastructure/MemeGame.Infrastructure.csproj", "MemeGame.Infrastructure/"]
 COPY ["MemeGame.Application/MemeGame.Application.csproj", "MemeGame.Application/"]
 COPY ["MemeGame.Domain/MemeGame.Domain.csproj", "MemeGame.Domain/"]
