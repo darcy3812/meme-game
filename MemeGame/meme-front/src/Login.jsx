@@ -12,7 +12,7 @@ const Login = (props) => {
     };
     return (
         <div className="login-container">
-            <div className="logo-box">Meme Games</div>
+            <div className="logo-box">Meme Game</div>
             <div className="login-box">
                 <input
                     placeholder="Enter your nickname"
