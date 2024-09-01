@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MemeGame.Bot\MemeGame.Bot.csproj" />
     <ProjectReference Include="..\MemeGame.Infrastructure\MemeGame.Infrastructure.csproj" />
   </ItemGroup>
 

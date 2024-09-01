@@ -2,11 +2,13 @@
 using Mapster.Utils;
 using MemeGame.API.Hubs;
 using MemeGame.Application.Notifications;
+using MemeGame.Bot;
 using MemeGame.Domain;
 using MemeGame.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -14,8 +16,16 @@ namespace MemeGame.API
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddAPI(this IServiceCollection services)
+        public static IServiceCollection AddAPI(this IServiceCollection services, IConfiguration configuration)
         {
+            var appConfigSection = configuration.GetSection(AppConfiguration.SectionName);
+            services.Configure<AppConfiguration>(appConfigSection);
+            var appConfig = appConfigSection.Get<AppConfiguration>();
+            if (appConfig.EnableMemeBot)
+            {
+                services.AddBot(configuration);
+            }
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {

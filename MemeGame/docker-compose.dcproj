@@ -10,6 +10,11 @@
     <DockerServiceName>memegame.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+	  <None Include="docker-compose.release.yml" />
+
+	  <None Include="docker-compose.release.override.yml">
+		  <DependentUpon>docker-compose.release.yml</DependentUpon>
+	  </None>
     <None Include="docker-compose.front.override.yml">
       <DependentUpon>docker-compose.front.yml</DependentUpon>
     </None>
