@@ -7,6 +7,6 @@ namespace MemeGame.Domain.Games.Dto
     {
         public string Name { get; set; }
         public List<GameUserDto> GameUsers { get; set; }
-        public GameSettingsDto GameSettings { get; set; }
+        public GameSettingsDto GameSettings { get; set; }        
     }
 }

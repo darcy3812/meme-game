@@ -3,6 +3,7 @@ using System;
 using MemeGame.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MemeGame.Infrastructure.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240901161146_AddAuthorToGameEntity")]
+    partial class AddAuthorToGameEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,6 +88,9 @@ namespace MemeGame.Infrastructure.Persistance.Migrations
 
                     b.Property<int>("GameId")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("IsAuthor")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("Points")
                         .HasColumnType("integer");
