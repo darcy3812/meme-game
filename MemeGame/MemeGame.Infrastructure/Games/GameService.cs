@@ -44,8 +44,7 @@ namespace MemeGame.Infrastructure.Games
 
             game.GameUsers.Add(new GameUser
             {
-                UserId = _userInfo.GetCurrentUserId(),
-                IsAuthor = true,
+                UserId = _userInfo.GetCurrentUserId(),                
             });
 
             game.AuthorId = _userInfo.GetCurrentUserId();
