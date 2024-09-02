@@ -11,5 +11,6 @@ namespace MemeGame.Domain.GameUsers
         public int GameId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public bool IsAuthor { get; set; }
     }
 }

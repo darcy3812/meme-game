@@ -41,10 +41,14 @@ namespace MemeGame.Infrastructure.Games
             gameCreatedDto.Validate();
 
             var game = gameCreatedDto.Adapt<Game>();
+
             game.GameUsers.Add(new GameUser
             {
                 UserId = _userInfo.GetCurrentUserId(),
+                IsAuthor = true,
             });
+
+            game.AuthorId = _userInfo.GetCurrentUserId();
 
             _context.Games.Add(game);
 
@@ -63,6 +67,11 @@ namespace MemeGame.Infrastructure.Games
             if (game == null)
             {
                 throw new Exception("Игра не найдена");
+            }
+
+            if (_userInfo.GetCurrentUserId() != game.AuthorId)
+            {
+                throw new Exception("Только создатель игры может её удалить");
             }
 
             _context.Games.Remove(game);
