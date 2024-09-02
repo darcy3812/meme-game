@@ -1,4 +1,5 @@
 ﻿using MemeGame.Application.Games;
+using MemeGame.Domain.Games.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace MemeGame.API.Hubs
         {
             var gameId = await _gameService.GetCurrentGameId();
             await Groups.AddToGroupAsync(Context.ConnectionId, gameId.ToString());
+        }
+
+        public async Task OnGameSettingUpdatedAsync (int id, GameSettingsDto gameSettingsDto)
+        {
+            await _gameService.ChangeGameSettingsAsync(id, gameSettingsDto);
         }
     }
 }

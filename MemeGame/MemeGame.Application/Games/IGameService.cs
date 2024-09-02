@@ -9,5 +9,6 @@ namespace MemeGame.Application.Games
         Task DeleteGameAsync(int id);
         Task<GameDto> JoinGameAsync(int id);
         Task<int> GetCurrentGameId();
+        Task ChangeGameSettingsAsync(int id, GameSettingsDto gameSettingsDto);
     }
 }

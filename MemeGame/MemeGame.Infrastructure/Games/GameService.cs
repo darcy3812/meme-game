@@ -3,6 +3,7 @@ using MemeGame.Application.Games;
 using MemeGame.Application.Notifications;
 using MemeGame.Application.UsersInfo;
 using MemeGame.Common.Extensions;
+using MemeGame.Domain;
 using MemeGame.Domain.Games;
 using MemeGame.Domain.Games.Dto;
 using MemeGame.Domain.Games.Notifications;
@@ -44,7 +45,7 @@ namespace MemeGame.Infrastructure.Games
 
             game.GameUsers.Add(new GameUser
             {
-                UserId = _userInfo.GetCurrentUserId(),                
+                UserId = _userInfo.GetCurrentUserId(),
             });
 
             game.AuthorId = _userInfo.GetCurrentUserId();
@@ -83,7 +84,7 @@ namespace MemeGame.Infrastructure.Games
         {
             var userId = _userInfo.GetCurrentUserId();
             var gameId = await _context.Games
-                .Where(g => !g.IsFinished && g.GameUsers
+                .Where(g => g.GameStatus!=GameStatus.Finished && g.GameUsers
                     .Any(gu => gu.UserId == userId))
                 .Select(g => g.Id)
                 .SingleOrDefaultAsync();
@@ -108,7 +109,7 @@ namespace MemeGame.Infrastructure.Games
 
         public async Task<GameDto> JoinGameAsync(int id)
         {
-            var game = await _context.Games.Where(g => g.Id == id && !g.IsFinished).FirstOrDefaultAsync();
+            var game = await _context.Games.Where(g => g.Id == id && g.GameStatus==GameStatus.Queue).FirstOrDefaultAsync();
 
             if (game == null)
             {
@@ -129,6 +130,35 @@ namespace MemeGame.Infrastructure.Games
             _lobbyNotificationSender.SendNotification(new GameUpdatedNotification(gameDto, game.Id));
 
             return gameDto;
+        }
+
+        public async Task ChangeGameSettingsAsync(int id, GameSettingsDto gameSettingsDto)
+        {
+            gameSettingsDto.Validate();
+
+            var game = await _context.Games.FirstOrDefaultAsync(g => g.Id == id);
+            if (game == null)
+            {
+                throw new Exception("Игра не найдена");
+            }
+
+            if (_userInfo.GetCurrentUserId() != game.AuthorId)
+            {
+                throw new Exception("Только создатель игры может изменять её настройки");
+            }
+
+            if (game.GameStatus != GameStatus.Queue)
+            {
+                throw new Exception("Изменить настройки можно только до начала игры");
+            }
+
+            game.GameSettings = gameSettingsDto.Adapt<GameSetting>();
+
+            await _context.SaveChangesAsync();
+
+            GameDto gameDto = game.Adapt<GameDto>();
+
+            _lobbyNotificationSender.SendNotification(new GameUpdatedNotification(gameDto, id));
         }
     }
 }
