@@ -22,6 +22,7 @@ namespace MemeGame.Infrastructure.Games
     {
         private readonly ApplicationContext _context;
         private readonly ILobbyNotificationSender _lobbyNotificationSender;
+        private readonly IGameNotificationSender _gameNotificationSender;
         private readonly IUserInfo _userInfo;
 
         private const int PageSize = 10;
@@ -29,11 +30,13 @@ namespace MemeGame.Infrastructure.Games
         public GameService(
             ApplicationContext context,
             ILobbyNotificationSender lobbyNotificationSender,
+            IGameNotificationSender gameNotificationSender,
             IUserInfo userInfo
             )
         {
             _context = context;
             _lobbyNotificationSender = lobbyNotificationSender;
+            _gameNotificationSender = gameNotificationSender;
             _userInfo = userInfo;
         }
 
@@ -152,13 +155,19 @@ namespace MemeGame.Infrastructure.Games
                 throw new Exception("Изменить настройки можно только до начала игры");
             }
 
+            if (game.GameUsers.Count < gameSettingsDto.MaxPlayers)
+            {
+                throw new Exception("В игре уже слишком много игроков");
+            }
+
             game.GameSettings = gameSettingsDto.Adapt<GameSetting>();
 
-            await _context.SaveChangesAsync();
+            game.GameSettings.Id=game.GameSettingsId;
 
-            GameDto gameDto = game.Adapt<GameDto>();
+            await _context.SaveChangesAsync();                  
 
-            _lobbyNotificationSender.SendNotification(new GameUpdatedNotification(gameDto, id));
+            _lobbyNotificationSender.SendNotification(new GameSettingsUpdatedNotification(gameSettingsDto, id));
+            _gameNotificationSender.SendNotification(new GameSettingsUpdatedNotification(gameSettingsDto, id));
         }
     }
 }
