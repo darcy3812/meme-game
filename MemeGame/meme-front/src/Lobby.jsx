@@ -44,10 +44,12 @@ const Lobby = () => {
                     alignItems: "center",
                 }}
             >
+                <h1>Connected123123</h1>
+                <GameCreateForm connection={connection}></GameCreateForm>
                 <h1>Games:</h1>
                 <ul>
                     {games.map((game) => (
-                        <li>
+                        <li key={game.name}>
                             <div
                                 style={{
                                     display: "flex",
