@@ -18,7 +18,7 @@ const Login = (props) => {
                 <input
                     placeholder="Enter your nickname"
                     type="text"
-                    className="box-border w-full h-14 mt-0 mx-0 mb-2.5 py-0 pr-0 pl-4 bg-white text-black text-base focus:border-2 focus:border-solid focus:border-red-400 focus:shadow-normal focus:outline-offset-0 focus:outline-none"
+                    className="box-border rounded-main w-full h-14 mt-0 mx-0 mb-2.5 py-0 pr-0 pl-4 bg-white text-black text-base focus:border-2 focus:border-solid focus:border-red-400 focus:shadow-normal focus:outline-offset-0 focus:outline-none"
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
                 />
