@@ -46,7 +46,7 @@ const Lobby = () => {
             >
                 <h1>Connected123123</h1>
                 <GameCreateForm connection={connection}></GameCreateForm>
-                <h1>Games:</h1>
+                <h1>Games Gamesss:</h1>
                 <ul>
                     {games.map((game) => (
                         <li key={game.name}>
