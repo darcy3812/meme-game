@@ -155,7 +155,7 @@ namespace MemeGame.Infrastructure.Games
                 throw new Exception("Изменить настройки можно только до начала игры");
             }
 
-            if (game.GameUsers.Count < gameSettingsDto.MaxPlayers)
+            if (game.GameUsers.Count > gameSettingsDto.MaxPlayers)
             {
                 throw new Exception("В игре уже слишком много игроков");
             }
@@ -166,7 +166,7 @@ namespace MemeGame.Infrastructure.Games
 
             await _context.SaveChangesAsync();                  
 
-            _lobbyNotificationSender.SendNotification(new GameSettingsUpdatedNotification(gameSettingsDto, id));
+            _lobbyNotificationSender.SendNotification(new GameSettingsUpdatedNotificationForLobby(gameSettingsDto, id));
             _gameNotificationSender.SendNotification(new GameSettingsUpdatedNotification(gameSettingsDto, id));
         }
     }
