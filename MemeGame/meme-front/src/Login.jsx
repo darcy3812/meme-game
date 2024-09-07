@@ -11,7 +11,7 @@ const Login = (props) => {
     };
     return (
         <div className="mx-auto my-0 max-w-5xl box-border flex flex-col gap-y-12 justify-center items-center">
-            <div className="flex p-5 font-boom font-black text-big text-center justify-center bg-cyan-400 bg-clip-text text-transparent">
+            <div className="flex p-5 font-boom font-black text-big text-center justify-center bg-cyan-400 bg-clip-text text-transparent cursor-default">
                 Meme Game
             </div>
             <div className="flex flex-col w-main min-w-52 max-w-5xl p-5">
