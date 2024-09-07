@@ -12,7 +12,7 @@ namespace MemeGame.Domain.Games
         public string Name { get; set; }
         public string Hash { get; set; }
         public DateTime CreationDate { get; set; }
-        public bool IsFinished { get; set; }
+        public GameStatus GameStatus { get; set; }
         public GameSetting GameSettings { get; set; }
         public int GameSettingsId { get; set; }
         public  User Author { get; set; }
