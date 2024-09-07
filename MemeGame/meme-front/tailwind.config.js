@@ -18,12 +18,16 @@ export default {
                 violets: "rgb(101, 1, 121)",
                 violeter: "rgb(54, 0, 65)",
                 darker: "rgb(22, 6, 45)",
+                main: "rgb(32, 32, 33)",
             },
             borderRadius: {
                 main: "77px",
             },
             boxShadow: {
                 normal: "0 0 3px #1670BE",
+            },
+            scale: {
+                99: "0.99",
             },
         },
     },

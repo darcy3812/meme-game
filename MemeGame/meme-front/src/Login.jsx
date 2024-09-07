@@ -14,7 +14,7 @@ const Login = (props) => {
             <div className="flex p-5 font-boom font-black text-big text-center justify-center bg-cyan-400 bg-clip-text text-transparent cursor-default">
                 Meme Game
             </div>
-            <div className="flex flex-col w-main min-w-52 max-w-5xl p-5">
+            <div className="flex flex-col w-main min-w-52 max-w-5xl p-5 gap-y-3.5">
                 <input
                     placeholder="Enter your nickname"
                     type="text"
@@ -24,7 +24,7 @@ const Login = (props) => {
                 />
 
                 <button
-                    className="bg-cyan-400 hover:bg-cyan-600 rounded-main border-none border-black border-2 px-2.5 py-1.5 text-darker text-xl font-normal text-wider leading-none text-center self-end h-14 w-full"
+                    className="bg-cyan-400 hover:bg-cyan-600 rounded-main border-none border-black border-2 px-2.5 py-1.5 text-darker text-xl font-normal text-wider leading-none text-center self-end h-14 w-full active:scale-99"
                     onClick={() => postLogin()}
                 >
                     Login
