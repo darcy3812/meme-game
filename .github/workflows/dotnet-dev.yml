@@ -32,7 +32,7 @@ jobs:
     - name: build and push docker image to registry
       uses: docker/build-push-action@v5
       with:
-          context: ./MemeGame/MemeGame.API
+          context: ./MemeGame.API
           push: true
           tags: darcy3812/memegameapi:latest
     
