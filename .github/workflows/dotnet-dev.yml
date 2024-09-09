@@ -31,8 +31,7 @@ jobs:
           password: ${{secrets.DOCKERHUB_TOKEN}}
     - name: build and push docker image to registry
       uses: docker/build-push-action@v5
-      with:
-          context: ./MemeGame.API          
+      with:         
           file: ./MemeGame.API/Dockerfile
           push: true
           tags: darcy3812/memegameapi:latest
