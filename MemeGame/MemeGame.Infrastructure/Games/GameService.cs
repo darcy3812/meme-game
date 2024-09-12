@@ -8,6 +8,7 @@ using MemeGame.Domain.Games;
 using MemeGame.Domain.Games.Dto;
 using MemeGame.Domain.Games.Notifications;
 using MemeGame.Domain.GameUsers;
+using MemeGame.Domain.GameUsers.Notifications;
 using MemeGame.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -87,7 +88,7 @@ namespace MemeGame.Infrastructure.Games
         {
             var userId = _userInfo.GetCurrentUserId();
             var gameId = await _context.Games
-                .Where(g => g.GameStatus!=GameStatus.Finished && g.GameUsers
+                .Where(g => g.GameStatus != GameStatus.Finished && g.GameUsers
                     .Any(gu => gu.UserId == userId))
                 .Select(g => g.Id)
                 .SingleOrDefaultAsync();
@@ -112,7 +113,7 @@ namespace MemeGame.Infrastructure.Games
 
         public async Task<GameDto> JoinGameAsync(int id)
         {
-            var game = await _context.Games.Where(g => g.Id == id && g.GameStatus==GameStatus.Queue).FirstOrDefaultAsync();
+            var game = await _context.Games.Where(g => g.Id == id && g.GameStatus == GameStatus.Queue).FirstOrDefaultAsync();
 
             if (game == null)
             {
@@ -162,12 +163,43 @@ namespace MemeGame.Infrastructure.Games
 
             game.GameSettings = gameSettingsDto.Adapt<GameSetting>();
 
-            game.GameSettings.Id=game.GameSettingsId;
+            game.GameSettings.Id = game.GameSettingsId;
 
-            await _context.SaveChangesAsync();                  
+            await _context.SaveChangesAsync();
 
             _lobbyNotificationSender.SendNotification(new GameSettingsUpdatedNotificationForLobby(gameSettingsDto, id));
             _gameNotificationSender.SendNotification(new GameSettingsUpdatedNotification(gameSettingsDto, id));
+        }
+
+        public async Task KickPlayer(int userId, int gameId)
+        {
+            var game = await _context.Games.Include(_ => _.GameUsers).FirstOrDefaultAsync(g => g.Id == gameId);
+
+            if (game == null)
+            {
+                throw new Exception("Игра не найдена");
+            }
+
+            if (_userInfo.GetCurrentUserId() != game.AuthorId)
+            {
+                throw new Exception("Только создатель игры может кикать игроков");
+            }
+            GameUser gameUser = game.GameUsers.FirstOrDefault(g => g.Id == userId);
+
+            if (gameUser == null)
+            {
+                throw new Exception("В игре нет такого игрока");
+            }
+
+            game.GameUsers.Remove(gameUser);
+
+            _context.GameUsers.Remove(gameUser);
+
+            await _context.SaveChangesAsync();
+
+            _gameNotificationSender.SendNotification(new GameUserKickedNotification(userId, gameId));
+            _lobbyNotificationSender.SendNotification(new GameUserKickedNotification(userId, gameId));
+
         }
     }
 }
