@@ -171,7 +171,7 @@ namespace MemeGame.Infrastructure.Games
             _gameNotificationSender.SendNotification(new GameSettingsUpdatedNotification(gameSettingsDto, id));
         }
 
-        public async Task KickPlayer(int userId, int gameId)
+        public async Task KickPlayer(int gameUserId, int gameId)
         {
             var game = await _context.Games.Include(_ => _.GameUsers).FirstOrDefaultAsync(g => g.Id == gameId);
 
@@ -184,21 +184,19 @@ namespace MemeGame.Infrastructure.Games
             {
                 throw new Exception("Только создатель игры может кикать игроков");
             }
-            GameUser gameUser = game.GameUsers.FirstOrDefault(g => g.Id == userId);
+            GameUser gameUser = game.GameUsers.FirstOrDefault(g => g.Id == gameUserId);
 
             if (gameUser == null)
             {
                 throw new Exception("В игре нет такого игрока");
-            }
-
-            game.GameUsers.Remove(gameUser);
+            }            
 
             _context.GameUsers.Remove(gameUser);
 
             await _context.SaveChangesAsync();
 
-            _gameNotificationSender.SendNotification(new GameUserKickedNotification(userId, gameId));
-            _lobbyNotificationSender.SendNotification(new GameUserKickedNotification(userId, gameId));
+            _gameNotificationSender.SendNotification(new GameUserKickedNotification(gameUserId, gameId));
+            _lobbyNotificationSender.SendNotification(new GameUserKickedNotification(gameUserId, gameId));
 
         }
     }
