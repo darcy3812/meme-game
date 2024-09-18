@@ -10,5 +10,6 @@ namespace MemeGame.Application.Games
         Task<GameDto> JoinGameAsync(int id);
         Task<int> GetCurrentGameId();
         Task ChangeGameSettingsAsync(int id, GameSettingsDto gameSettingsDto);
+        Task KickPlayer(int userId, int gameId);
     }
 }
