@@ -207,10 +207,10 @@ namespace MemeGame.Infrastructure.Games
             GameUser gameUser = _context.GameUsers.Where(_ => _.User.Id == currentUserId).FirstOrDefault(_ => _.Game.GameStatus != GameStatus.Finished);
 
             _context.GameUsers.Remove(gameUser);
-            _gameNotificationSender.SendNotification(new PlayerLeaveNotification(gameUser.Id, gameUser.GameId));
-            _lobbyNotificationSender.SendNotification(new PlayerLeaveNotification(gameUser.Id, gameUser.GameId));
 
             await _context.SaveChangesAsync();
+
+            _gameNotificationSender.SendNotification(new PlayerLeaveNotification(gameUser.Id, gameUser.GameId));                     
 
         }
     }

@@ -26,5 +26,10 @@ namespace MemeGame.API.Hubs
         {
             await _gameService.ChangeGameSettingsAsync(id, gameSettingsDto);
         }
+
+        public async Task LeaveGame()
+        {
+            await _gameService.LeaveGame();
+        }
     }
 }
