@@ -189,7 +189,7 @@ namespace MemeGame.Infrastructure.Games
             if (gameUser == null)
             {
                 throw new Exception("В игре нет такого игрока");
-            }            
+            }
 
             _context.GameUsers.Remove(gameUser);
 
@@ -197,6 +197,20 @@ namespace MemeGame.Infrastructure.Games
 
             _gameNotificationSender.SendNotification(new GameUserKickedNotification(gameUserId, gameId));
             _lobbyNotificationSender.SendNotification(new GameUserKickedNotification(gameUserId, gameId));
+
+        }
+
+        public async Task LeaveGame()
+        {
+            int currentUserId = _userInfo.GetCurrentUserId();
+
+            GameUser gameUser = _context.GameUsers.Where(_ => _.User.Id == currentUserId).FirstOrDefault(_ => _.Game.GameStatus != GameStatus.Finished);
+
+            _context.GameUsers.Remove(gameUser);
+
+            await _context.SaveChangesAsync();
+
+            _gameNotificationSender.SendNotification(new PlayerLeaveNotification(gameUser.Id, gameUser.GameId));                     
 
         }
     }

@@ -11,5 +11,6 @@ namespace MemeGame.Application.Games
         Task<int> GetCurrentGameId();
         Task ChangeGameSettingsAsync(int id, GameSettingsDto gameSettingsDto);
         Task KickPlayer(int userId, int gameId);
+        Task LeaveGame();
     }
 }
